@@ -8,6 +8,8 @@ function App() {
     comentario: '',
   });
 
+  const [isUrlValid, setIsUrlValid] = useState(true); // Estado para rastrear la validez de la URL
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -16,8 +18,20 @@ function App() {
     });
   };
 
+  // Validación de URL en tiempo real
+  if (url === 'url') {
+    const urlPattern = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
+    const isValid = urlPattern.test(value);
+    setIsUrlValid(isValid);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isUrlValid) {
+      console.error('La URL ingresada no es válida');
+      return;
+    }
 
     try {
       const response = await axios.post('/api/guardar', formData);
