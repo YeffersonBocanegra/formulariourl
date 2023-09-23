@@ -1,42 +1,85 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  font-size: 40px; /* Tamaño de fuente más grande */
+  color: #007bff; /* Cambia el color a uno atractivo, en este caso, azul */
+  font-family: 'Arial';
+  font-style: italic; /* Establece la fuente en cursiva */
+  font-weight: bold; /* Opcional: negrita */
+  position: fixed; /* Fija la posición */
+  top: 0; /* Coloca en la parte superior */
+  left: 0; /* Alinea a la izquierda (opcional) */
+  right: 0; /* Alinea a la derecha (opcional) */
+  background-color: #fff; /* Color de fondo (opcional) */
+  padding: 10px 20px; /* Espaciado interno (opcional) */
+  text-align: center; /* Centra el texto horizontalmente */
+  z-index: 1000; /* Controla la superposición (opcional) */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Agrega espacio superior al formulario para evitar que se coloque debajo del h1 */
+form {
+  margin-top: 80px; /* Ajusta el valor según sea necesario */
 }
 
-.card {
-  padding: 2em;
+/* Estilos para los campos */
+div {
+  margin-bottom: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+/* Estilos para el botón */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #28a745;
+}
+
+button[type="button"] {
+  background-color: #dc3545;
 }

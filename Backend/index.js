@@ -3,7 +3,7 @@ import { connect, model } from 'mongoose';
 const app = express();
 
 // Conectar a la base de datos MongoDB
-connect('mongodb://127.0.0.1:27017/URL1', {
+connect('mongodb://127.0.0.1:27017/FormularioURL', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
