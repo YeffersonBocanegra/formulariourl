@@ -37,6 +37,7 @@ function App() {
   const { fields, addField, removeField, updateField } = useDynamicFields(initialField);
 
   const [isUrlValid, setIsUrlValid] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false); // Estado para rastrear si el formulario ha sido enviado
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -76,46 +77,63 @@ function App() {
           console.error('Error al guardar el dato');
         }
       }
+
+      // Establecer formSubmitted en true para mostrar un mensaje de éxito
+      setFormSubmitted(true);
     } catch (error) {
       console.error('Error al enviar la solicitud:', error);
     }
   };
 
+  const resetForm = (setFields) => { // Pasar setFields como argumento
+    // Reiniciar los campos a su estado inicial
+    setFields([initialField]);
+    setIsUrlValid(true);
+    setFormSubmitted(false);
+  };
+
   return (
     <div>
       <h1>Formulario Urls & Comentarios</h1>
-      <form onSubmit={handleSubmit}>
-        {fields.map((field, index) => (
-          <div key={index}>
-            <label htmlFor={`url-${index}`}>URL:</label>
-            <input
-              type="text"
-              id={`url-${index}`}
-              name="url"
-              value={field.url}
-              onChange={(e) => handleChange(e, index)}
-              required
-            />
-            {!isUrlValid && field.url.trim() !== '' && <p className="error-message">URL ¡No válida!</p>}
-            <label htmlFor={`comentario-${index}`}>Comentario:</label>
-            <textarea
-              id={`comentario-${index}`}
-              name="comentario"
-              value={field.comentario}
-              onChange={(e) => handleChange(e, index)}
-              required
-            />
-            {fields.length > 1 && (
-              <button type="button" onClick={() => removeField(index)}>
-                Eliminar Campo
-              </button>
-            )}
-          </div>
-        ))}
+      {formSubmitted ? (
         <div>
-          <button type="submit">Enviar Todos</button>
+          <p>Formulario enviado con éxito.</p>
+          <button onClick={resetForm}>Enviar otro</button>
         </div>
-      </form>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          {fields.map((field, index) => (
+            <div key={index}>
+              <label htmlFor={`url-${index}`}>URL:</label>
+              <input
+                type="text"
+                id={`url-${index}`}
+                name="url"
+                value={field.url}
+                onChange={(e) => handleChange(e, index)}
+                required
+              />
+              {!isUrlValid && field.url.trim() !== '' && <p className="error-message">URL ¡No válida!</p>}
+              <label htmlFor={`comentario-${index}`}>Comentario:</label>
+              <textarea
+                id={`comentario-${index}`}
+                name="comentario"
+                value={field.comentario}
+                onChange={(e) => handleChange(e, index)}
+                required
+              />
+              {fields.length > 1 && (
+                <button type="button" onClick={() => removeField(index)}>
+                  Eliminar Campo
+                </button>
+              )}
+            </div>
+          ))}
+          <div>
+            <button type="submit">Enviar Todos</button>
+          </div>
+        </form>
+      )}
       <button onClick={addField}>Agregar Campo</button>
     </div>
   );
